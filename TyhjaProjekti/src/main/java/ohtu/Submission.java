@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Submission {
     private String student_number;
-    private String week;
+    private int week;
     private int hours;
     
     private boolean a1;
@@ -30,9 +30,7 @@ public class Submission {
     private boolean a20;
     private boolean a21;
     
-    public String getWeek() {
-        return week;
-    }
+    private Course course = null;
     
     public int getHours() {
         return hours;
@@ -41,11 +39,6 @@ public class Submission {
     public String getStudent_number() {
         return student_number;
     }
-   
-    
-    public void setWeek(String week) {
-        this.week = week;
-    }    
     
     public void setHours(int hours) {
         this.hours = hours;
@@ -53,6 +46,10 @@ public class Submission {
 
     public void setStudent_number(String student_number) {
         this.student_number = student_number;
+    }
+    
+    public void setCourse(Course course) {
+        this.course = course;
     }
     
     public List<String> getCompletedTasks() {
@@ -75,7 +72,11 @@ public class Submission {
         List<String> completed = getCompletedTasks();
         
         String str = "viikko " + week + ":";
-        str += " tehtyjä tehtäviä yhteensä: " + completed.size() + ", ";
+        str += " tehtyjä tehtäviä yhteensä: " + completed.size();
+        if (course != null) {
+            str += " (maksimi " + course.getWeek(week) + ")";
+        }
+        str += ", ";
         str += "aikaa kului " + hours + " tuntia, ";
         str += "tehdyt tehtävät: " + String.join(" ", completed);
         
